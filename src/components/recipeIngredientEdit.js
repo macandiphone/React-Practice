@@ -1,7 +1,7 @@
 import React from 'react'
 
 const RecipeIngredientEdit = props => {
-  const { ingredient, handleIngredientChange } = props
+  const { ingredient, handleIngredientChange, handleIngredientDelete } = props
 
   function handleChange(changes) {
     handleIngredientChange(ingredient.id, { ...ingredient, ...changes })
@@ -11,17 +11,19 @@ const RecipeIngredientEdit = props => {
     <>
       <input
         type="text"
-        onInput={e => handleChange({ name: e.target.value })}
+        onChange={e => handleChange({ name: e.target.value })}
         className="recipe-edit__input"
         value={ingredient.name}
       />
       <input
         type="text"
         className="recipe-edit__input"
-        onInput={e => handleChange({ amount: e.target.value })}
+        onChange={e => handleChange({ amount: e.target.value })}
         value={ingredient.amount}
       />
-      <button className="btn btn--danger">&times;</button>
+      <button className="btn btn--danger" onClick={() => handleIngredientDelete(ingredient.id)}>
+        &times;
+      </button>
     </>
   )
 }
